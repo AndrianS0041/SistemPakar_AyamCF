@@ -12,7 +12,8 @@ class GejalaController extends Controller
     {
         $gejala = Gejala::orderby('id','ASC')->paginate(5);
         $count = Gejala::count();
-        return view('admin/gejala/index', compact('gejala', 'count'));
+        $kode_gejala = $this->newKode();
+        return view('admin/gejala/index', compact('gejala', 'count','kode_gejala'));
     }
 
     public function newKode()

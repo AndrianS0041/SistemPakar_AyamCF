@@ -86,7 +86,14 @@
             <form method="post" action="{{ route('gejala.save')}}">
               {{ csrf_field() }}
             <label>Kode</label>
-            <input type="text" name="kode" id="kode" class="form-control" />
+              <input type="text" name="generate" class="form-control" value="{{ $kode_gejala }}" disabled>
+              <input type="hidden" name="kode_gejala" class="form-control" value="{{ $kode_gejala }}">
+ 
+                @if($errors->has('kode_gejala'))
+                  <div class="text-danger">
+                    {{ $errors->first('kode_gejala')}}
+                  </div>
+                @endif
             <br />
             <label>Nama Gejala</label>
             <input type="text" name="nama" id="nama" class="form-control"/>
