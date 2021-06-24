@@ -52,15 +52,15 @@ class PenyakitController extends Controller
         $penyakit = Penyakit::create([
             'kode_penyakit' => $request->kode_penyakit,
             'nama_penyakit' => $request->nama_penyakit,
-            'detail' => $request->emdetailail,
+            'detail' => $request->detail,
             'saran' => $request->saran,
             'gambar' => $nama_file         
             ]);
         } else {
-            $pelanggan = Pelanggan::create([
+            $penyakit = Penyakit::create([
                 'kode_penyakit' => $request->kode_penyakit,
                 'nama_penyakit' => $request->nama_penyakit,
-                'detail' => $request->emdetailail,
+                'detail' => $request->detail,
                 'saran' => $request->saran      
                 ]);
         }
@@ -71,7 +71,7 @@ class PenyakitController extends Controller
     public function edit($id)
     {
         $penyakit = Penyakit::find($id);
-        return view('/penyakit/edit_penyakit', compact('penyakit'));
+        return view('admin/penyakit/edit_penyakit', compact('penyakit'));
     }
 
     public function update($id, Request $request)
@@ -107,7 +107,7 @@ class PenyakitController extends Controller
         $penyakit->nama_penyakit = $request->nama_penyakit;
         $penyakit->detail = $request->detail;
         $penyakit->saran = $request->saran;
-        $penyakit->foto = $nama_file; 
+        $penyakit->gambar = $nama_file; 
 
         $penyakit->save();
         return redirect('/penyakit')->with(['success' => 'Data penyakit '. $request->name .' berhasil diubah.']);

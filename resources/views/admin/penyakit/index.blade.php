@@ -62,7 +62,7 @@
                             <td>{{ $p->detail }}</td>
                             <td>{{ $p->saran }}</td>
                             <td>
-                              <a href="{{ route('gejala.edit', $p->id) }}" class="btn btn-success"><i class="far fa-edit"></i> Edit</a>
+                              <a href="{{ route('penyakit.edit', $p->id) }}" class="btn btn-success"><i class="far fa-edit"></i> Edit</a>
                               <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$p->id}})" 
                                   data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
                             </td>
@@ -70,7 +70,7 @@
                         @endforeach
                         @else
                           <tr>
-                            <td colspan="7" class="text-center">Tidak ada data gejala.</td>
+                            <td colspan="7" class="text-center">Tidak Ada Data Penyakit.</td>
                           </tr>
                         @endif
                         </tbody>

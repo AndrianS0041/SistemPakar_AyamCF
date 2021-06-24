@@ -13,10 +13,6 @@
               </li>
               <li class="menu-header">Main Menu</li>
               <li class="nav-item dropdown">
-                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Admin</span></a>
-                
-              </li>
-              <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('pengetahuan') }}"><i class="fas fa-columns"></i> <span>Basis Pengetahuan</span></a>
                 
               </li>
@@ -28,6 +24,9 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('penyakit') }}"><i class="fas fa-bug"></i> <span>Penyakit</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="{{ route('pakar') }}"><i class="fas fa-user"></i> <span>Pakar</span></a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('password') }}"><i class="fas fa-unlock-alt"></i> <span>Ubah Pasword</span></a>
