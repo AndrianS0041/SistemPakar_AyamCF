@@ -3,77 +3,83 @@
 @section('content')
 
 <div class="main-content">
-  <section class="section">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-12">
-        <div class="card card-statistic-2">
-          <div class="card-stats">
-            <div class="card-stats-title">
-              <h6 class="nav-item font-weight-semibold d-none d-lg-block">
-                <i class="mdi mdi-calendar-outline"></i> {{ date("d M Y") }} - <span id="jam"></span> : <span id="menit"></span> : <span id="detik"></span></h6>
-              <div class="dropdown d-inline">
-                  </div>
-                  </div>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total gejala</h4>
-                  </div>
-                  <div class="card-body">
-                    59
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-chart">
-                  <canvas id="balance-chart" height="80"></canvas>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-bug"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total Penyakit</h4>
-                  </div>
-                  <div class="card-body">
-                    $187,13
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-chart">
-                  <canvas id="sales-chart" height="80"></canvas>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-columns"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Basis Pengetahuan</h4>
-                  </div>
-                  <div class="card-body">
-                    4,732
-                  </div>
-                </div>
-              </div>
+        <section class="section">
+          <div class="section-header">
+            <h1>Penyakit</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="{{ route('db.admin') }}">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="{{ route('penyakit') }}">Penyakit</a></div>
+              <div class="breadcrumb-item">Semua Data</div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header">
-                  
-                 
-                  <div class="w3-content w3-section" style="max-width:100%">
-                    <img class="mySlides w3-animate-fading" src="{{ url('assets/img/ayam.jpg') }}" style="width:100%">
-                    <img class="mySlides w3-animate-fading" src="{{ url('assets/img/telur.jpg') }}" style="width:100%">
+          <div class="section-body">
+            <h2 class="section-title">Data Penyakit</h2>
+            
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="section-header-button">
+                      <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Penyakit</button>
+                    </div>
+                    <br>
+                    <br>
+                    <hr class="">
+                      <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('penyakit.search') }}">
+                        <input class="form-control mr-sm-2" style="width:350px;" type="text" name="q" placeholder="Masukkan Kode Penyakit / Nama Penyakit" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><span class="mdi mdi-magnify"></span> Cari</button>
+                      </form>
+                  </div>
+                  <div class="card-body">
+                    <div class="clearfix mb-3"></div>
+                    @if (session('success'))
+                      <div class="alert alert-success">
+                        {{ session('success') }}
+                      </div>
+                    @endif
+                    @if (session('error'))
+                      <div class="alert alert-danger">
+                        {{ session('error') }}
+                      </div>
+                    @endif
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                          <tr>
+                            <th>Kode Penyakit</th>
+                            <th>Nama Penyakit</th>
+                            <th>Detail Penyakit</th>
+                            <th>Saran Penyakit</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        @if ($count != '')
+                        @foreach($penyakit as $p)
+                          <tr>
+                            <td>{{ $p->kode_penyakit }}</td>
+                            <td>{{ $p->nama_penyakit }}</td>
+                            <td>{{ $p->detail }}</td>
+                            <td>{{ $p->saran }}</td>
+                            <td>
+                              <a href="{{ route('gejala.edit', $p->id) }}" class="btn btn-success"><i class="far fa-edit"></i> Edit</a>
+                              <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$p->id}})" 
+                                  data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                            </td>
+                          </tr>
+                        @endforeach
+                        @else
+                          <tr>
+                            <td colspan="7" class="text-center">Tidak ada data gejala.</td>
+                          </tr>
+                        @endif
+                        </tbody>
+                      </table>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        {{ $penyakit->links() }}
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -82,21 +88,122 @@
         </section>
       </div>
 
-      <script>
-        var myIndex = 0;
-        carousel();
+      <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog ">
+          <!-- Modal content-->
+          <form action="" id="deleteForm" method="post">
+            <div class="modal-content">
+              <div class="modal-header bg-danger">
+                  <h4 class="modal-title text-light"> Konfirmasi !</h4>
+              </div>
+              <div class="modal-body">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <p class="text-center">Apakah anda yakin akan menghapus gejala ? </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+                <button type="submit" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()"><span class="mdi mdi-delete"></span> Ya, Hapus</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
-        function carousel() {
-          var i;
-          var x = document.getElementsByClassName("mySlides");
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-          }
-          myIndex++;
-          if (myIndex > x.length) {myIndex = 1}    
-          x[myIndex-1].style.display = "block";  
-          setTimeout(carousel, 3000);    
+      <div id="add_data_Modal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Form Tambah Penyakit</h4>
+            <button class="btn btn-danger" type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{{ route('penyakit.save')}}">
+              {{ csrf_field() }}
+            
+              <div class="form-group">
+                <label>Kode Penyakit</label>
+                <input type="text" name="generate" class="form-control" value="{{ $kode_penyakit }}" disabled>
+                <input type="hidden" name="kode_penyakit" class="form-control" value="{{ $kode_penyakit }}">
+ 
+                @if($errors->has('kode_penyakit'))
+                  <div class="text-danger">
+                    {{ $errors->first('kode_penyakit')}}
+                  </div>
+                @endif
+              </div>
+
+              <div class="form-group">
+                <label>Nama Penyakit*</label>
+                <input type="text" name="nama_penyakit" class="form-control" placeholder="Nama Penyakit .." value="{{ old('nama_penyakit') }}">
+            
+                @if($errors->has('nama_penyakit'))
+                  <div class="text-danger">
+                    {{ $errors->first('nama_penyakit')}}
+                  </div>
+                @endif
+              </div>
+        
+              <div class="form-group">
+                <label>Detail*</label>
+                <textarea name="detail" id="" cols="30" rows="10" class="form-control" placeholder="Detail Penyakit .." value="{{ old('detail') }}"></textarea>
+            
+                @if($errors->has('detail'))
+                  <div class="text-danger">
+                    {{ $errors->first('detail')}}
+                  </div>
+                @endif
+              </div>
+
+              <div class="form-group">
+                <label>Saran*</label>
+                <textarea name="saran" id="" cols="30" rows="10" class="form-control" placeholder="Saran Penyakit .." value="{{ old('saran') }}"></textarea>
+            
+                @if($errors->has('saran'))
+                  <div class="text-danger">
+                    {{ $errors->first('saran')}}
+                  </div>
+                @endif
+              </div>
+
+              <div class="form-group">
+                <label>Gambar*</label>
+                
+                <input type="file" name="foto" class="form-control" placeholder="Upload foto profil">
+                <br>
+                  <label>Format file foto yang diizinkan: jpg,jepg,png dan ukuran file maksimal 2MB</label>
+     
+                  @if($errors->has('foto'))
+                    <div class="text-danger">
+                      {{ $errors->first('foto')}}
+                    </div>
+                  @endif
+              </div>
+            
+              <label style="color:red;">* Wajib diisi.</label>
+              <br>
+              <button class="btn btn-success float-right" type="submit" name="submit" id="insert" value="Submit"><i class="far fa-save"></i> Submit</button>
+            
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script type="text/javascript">
+        function deleteData(id)
+        {
+            var id = id;
+            var url = '{{ route("penyakit.delete", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm").attr('action', url);
         }
-      </script>
+        function formSubmit()
+        {
+            $("#deleteForm").submit();
+        }
+    </script>
+
       
 @endsection

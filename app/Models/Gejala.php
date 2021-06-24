@@ -8,6 +8,6 @@ class Gejala extends Model
 {
     protected $table = 'gejala';
 
-    protected $fillable = ['kode_gejala','nama_gejala', 'kategori'];
+    protected $fillable = ['kode_gejala', 'kategori', 'nama_gejala'];
 
 }

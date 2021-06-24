@@ -47,6 +47,54 @@ class GejalaController extends Controller
             'nama_gejala' => $request->nama_gejala
         ]);
 
-        return redirect('admin/gejala')->with(['success' => 'Gejala '. $request->nama_gejala .' berhasil ditambahkan.']);;
+        return redirect('/gejala')->with(['success' => 'Gejala '. $request->nama_gejala .' berhasil ditambahkan.']);;
     }
+
+    public function edit($id)
+    {
+        $gejala = Gejala::find($id);
+        return view('admin/gejala/edit_gejala', compact('gejala'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $this->validate($request, [
+            'kode_gejala' => ['required', 'max:6'],
+            'kategori' => ['required'],
+            'nama_gejala' => ['required', 'string']
+        ]);
+
+        $gejala = Gejala::find($id);
+        $gejala->kategori = $request->kategori;
+        $gejala->nama_gejala = $request->nama_gejala;
+
+        $gejala->save();
+
+        return redirect('/gejala')->with(['success' => 'Gejala '. $request->nama_gejala .' berhasil diubah.']);
+    }
+
+    public function search(Request $request){
+        $gejala = Gejala::when($request->g, function ($query) use ($request) {
+        $query->where('kategori', 'LIKE', "%{$request->g}%")
+                ->orWhere('nama_gejala', 'LIKE', "%{$request->g}%")
+                ->orWhere('kode_gejala', 'LIKE', "%{$request->g}%");
+        })->paginate(5);
+        $count = Gejala::when($request->g, function ($query) use ($request) {
+        $query->where('kategori', 'LIKE', "%{$request->g}%")
+                ->orWhere('nama_gejala', 'LIKE', "%{$request->g}%")
+                ->orWhere('kode_gejala', 'LIKE', "%{$request->g}%");
+        })->count();
+        $gejala->appends($request->only('g'));
+        $old = $request->g;
+    
+        return view('/gejala', compact('gejala', 'old', 'count'));
+    }
+
+    public function delete($id)
+    {
+        $gejala = Gejala::find($id);
+        $gejala->delete();
+        return redirect('/gejala')->with(['success' => 'Gejala '. $gejala->nama_gejala .' berhasil dihapus']);
+    }
+    
 }
