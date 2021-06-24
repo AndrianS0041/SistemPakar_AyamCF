@@ -18,7 +18,7 @@
               <div class="col-12 col-md-12 col-lg-12">
                 <div class="card profile-widget">
                   <div class="profile-widget-header">
-                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                    <img alt="image" src="{{ url('assets/img/favicon/favicon-32x32.png')}}" class="rounded-circle profile-widget-picture">
                     <div class="profile-widget-items">
                       <div class="profile-widget-item">
                         <div class="profile-widget-item-label">Posts</div>
