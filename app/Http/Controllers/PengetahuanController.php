@@ -34,8 +34,17 @@ class PengetahuanController extends Controller
         return $hasil;
     }
 
-    public function select(Request $request)
+    public function penyakit(Request $request)
     {
+        // $penyakit = [];
+        // if($request->has('p')){
+        //     $search = $request->p;
+        //     $penyakit = Penyakit::select("id", "nama_penyakit"
+        //                 ->where('nama_penyakit', 'LIKE', "%$search%")
+        //                 ->get());
+        // }
+        // return response()->json($penyakit);
+
         $search = $request->get('term');
         $result = Penyakit::select('id','nama_penyakit')
         ->where('nama_penyakit', 'LIKE', '%'. $search. '%')
@@ -45,7 +54,7 @@ class PengetahuanController extends Controller
         return response()->json($result);
     } 
 
-    public function select2(Request $request)
+    public function gejala(Request $request)
     {
         $search = $request->get('term');
         $result = Gejala::select('id','nama_gejala')

@@ -70,7 +70,7 @@ class GejalaController extends Controller
 
         $gejala->save();
 
-        return redirect('/gejala')->with(['success' => 'Gejala '. $request->nama_gejala .' berhasil diubah.']);
+        return redirect('admin/gejala/index')->with(['success' => 'Gejala '. $request->nama_gejala .' berhasil diubah.']);
     }
 
     public function search(Request $request){

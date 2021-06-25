@@ -3,77 +3,129 @@
 @section('content')
 
 <div class="main-content">
-  <section class="section">
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-12">
-        <div class="card card-statistic-2">
-          <div class="card-stats">
-            <div class="card-stats-title">
-              <h6 class="nav-item font-weight-semibold d-none d-lg-block">
-                <i class="mdi mdi-calendar-outline"></i> {{ date("d M Y") }} - <span id="jam"></span> : <span id="menit"></span> : <span id="detik"></span></h6>
-              <div class="dropdown d-inline">
-                  </div>
-                  </div>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-heartbeat"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total gejala</h4>
-                  </div>
-                  <div class="card-body">
-                    59
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-chart">
-                  <canvas id="balance-chart" height="80"></canvas>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-bug"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Total Penyakit</h4>
-                  </div>
-                  <div class="card-body">
-                    $187,13
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
-                <div class="card-chart">
-                  <canvas id="sales-chart" height="80"></canvas>
-                </div>
-                <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-columns"></i>
-                </div>
-                <div class="card-wrap">
-                  <div class="card-header">
-                    <h4>Basis Pengetahuan</h4>
-                  </div>
-                  <div class="card-body">
-                    4,732
-                  </div>
-                </div>
-              </div>
+        <section class="section">
+          <div class="section-header">
+            <h1>Diagnosa</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="{{ route('db.admin') }}">Dashboard</a></div>
+              <div class="breadcrumb-item">Diagnosa</div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-header">
-                  
-                 
-                  <div class="w3-content w3-section" style="max-width:100%">
-                    <img class="mySlides w3-animate-fading" src="{{ url('assets/img/ayam.jpg') }}" style="width:100%">
-                    <img class="mySlides w3-animate-fading" src="{{ url('assets/img/telur.jpg') }}" style="width:100%">
+          <div class="section-body">
+            
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="alert alert-warning">
+                      <h3>Perhatian!</h3>
+                      <p>Silahkan memilih gejala sesuai dengan kondisi ayam anda, anda dapat memilih kepastian kondisi ayam dari pasti tidak sampai pasti ya, jika sudah tekan tombol proses () di bawah untuk melihat hasil.</p>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="clearfix mb-3"></div>
+                    @if (session('success'))
+                      <div class="alert alert-success">
+                        {{ session('success') }}
+                      </div>
+                    @endif
+                    @if (session('error'))
+                      <div class="alert alert-danger">
+                        {{ session('error') }}
+                      </div>
+                    @endif
+                    <div class="table-responsive">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                          <div class='alert alert-info'>
+                            <h5>Kategori Makanan</b></h5>
+                          </div>
+                          <table class="table table-bordered table-hover table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Kode Gejala</th>
+                                  <th>Nama Gejala</th>
+                                  <th>Pilih Kondisi</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                          <div class='alert alert-info'>
+                            <h5>Kategori Kotoran</b></h5>
+                          </div>
+                          <table class="table table-bordered table-hover table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Kode Gejala</th>
+                                  <th>Nama Gejala</th>
+                                  <th>Pilih Kondisi</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                          <div class='alert alert-info'>
+                            <h5>Kategori Pernafasan</b></h5>
+                          </div>
+                          <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                              <tr>
+                                <th>Kode Gejala</th>
+                                <th>Nama Gejala</th>
+                                <th>Pilih Kondisi</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                          <div class='alert alert-info'>
+                            <h5>Kategori Telur</b></h5>
+                          </div>
+                          <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                              <tr>
+                                <th>Kode Gejala</th>
+                                <th>Nama Gejala</th>
+                                <th>Pilih Kondisi</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        
+                    </div> 
                   </div>
                 </div>
               </div>
@@ -82,21 +134,6 @@
         </section>
       </div>
 
-      <script>
-        var myIndex = 0;
-        carousel();
 
-        function carousel() {
-          var i;
-          var x = document.getElementsByClassName("mySlides");
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-          }
-          myIndex++;
-          if (myIndex > x.length) {myIndex = 1}    
-          x[myIndex-1].style.display = "block";  
-          setTimeout(carousel, 3000);    
-        }
-      </script>
-      
+
 @endsection

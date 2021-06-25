@@ -14,7 +14,9 @@
               <li class="menu-header">Main Menu</li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="{{ route('pengetahuan') }}"><i class="fas fa-columns"></i> <span>Basis Pengetahuan</span></a>
-                
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="{{ route('diagnosa') }}"><i class="fas fa-comment-medical"></i> <span>Diagnosa</span></a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link " href="{{ route('gejala') }}"><i class="fas fa-heartbeat"></i> <span>Gejala</span></a>

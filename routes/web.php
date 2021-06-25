@@ -39,13 +39,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [PakarController::class, 'index'])->name('pakar');
     });
 
-    // Diagnosa
-    Route::prefix('diagnosa')->group(function () {
-        Route::get('/', [DiagnosaController::class, 'index'])->name('diagnosa');
-        Route::get('/tambah', [DiagnosaController::class, 'tambah'])->name('diagnosa.add');
-        Route::post('/store', [DiagnosaController::class, 'store'])->name('diagnosa.save');
-    });
-
 
     // Gejala
     Route::prefix('gejala')->group(function () {
@@ -66,8 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('pengetahuan')->group(function () {
         Route::get('/', [PengetahuanController::class, 'index'])->name('pengetahuan');
         Route::get('/tambah', [PengetahuanController::class, 'tambah'])->name('p.add');
-        Route::get('p.add', [PengetahuanController::class, 'select'])->name('get.penyakit');
-        Route::get('/gejala', [PengetahuanController::class, 'select2'])->name('get.gejala');
+        Route::get('/ss', [PengetahuanController::class, 'penyakit'])->name('get.penyakit');
+        Route::get('/gejala', [PengetahuanController::class, 'gejala'])->name('get.gejala');
         Route::post('/store', [PengetahuanController::class, 'store'])->name('p.save');
         Route::get('/search', [PengetahuanController::class, 'search'])->name('p.search');
         Route::get('/edit/{id}', [PengetahuanController::class, 'edit'])->name('p.edit');
@@ -86,6 +79,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{id}', [PenyakitController::class, 'edit'])->name('penyakit.edit');
         Route::put('/update/{id}', [PenyakitController::class, 'update'])->name('penyakit.update');
         Route::delete('/delete/{id}', [PenyakitController::class, 'delete'])->name('penyakit.delete');
+
+    });
+
+    // Diagnosa
+    Route::prefix('diagnosa')->group(function () {
+        Route::get('/', [DiagnosaController::class, 'index'])->name('diagnosa');
 
     });
 

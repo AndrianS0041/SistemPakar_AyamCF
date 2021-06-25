@@ -21,6 +21,7 @@
                   <div class="card-header">
                     <div class="section-header-button">
                       <button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Basis Pengetahuan</button>
+                      {{-- <a href="{{route('p.add')}}"><button type="button" class="btn btn-secondary"><i class="fas fa-plus"></i> Tambah Basis Pengetahuan</button></a> --}}
                     </div>
                     <br>
                     <br>
@@ -177,7 +178,7 @@
 
                   <div class="form-group">
                     <label>Nama Penyakit*</label>
-                    <select class="form-control" id="cari_penyakit" name="id_penyakit"></select>
+                    <select class="penyakit form-control" id="cari_penyakit" name="id_penyakit"></select>
                 
                     @if($errors->has('id_penyakit'))
                       <div class="text-danger">
@@ -188,7 +189,7 @@
             
                   <div class="form-group">
                     <label>Gejala*</label>
-                    <select class="form-control" id="cari_gejala" name="id_gejala"></select>
+                    <select class="gejala form-control" id="cari_gejala" name="id_gejala"></select>
                 
                     @if($errors->has('id_gejala'))
                       <div class="text-danger">
@@ -259,55 +260,51 @@
     $("#deleteForm").submit();
   }
 </script>
-  
-{{-- select2 --}}
-{{-- <script>
-  $(document).ready(function() {
-      $('#penyakit').select2();
-  });
-</script> --}}
 
 <script type="text/javascript">
-    $('.cari_penyakit').select2({
-      placeholder: 'Cari Penyakit...',
-      ajax: {
-        url: "{{ route('get.penyakit') }}",
-        dataType: 'json',
-        delay: 250,
-        processResults: function (data) {
-          return {
-            results:  $.map(data, function (item) {
-              return {
-                text: item.nama_penyakit,
-                id: item.id
-              }
-            })
-            
-          };
-        },
-        cache: true
-      }
+    $(document).ready(function() {
+    $('.penyakit').select2({
+        placeholder: 'Cari Penyakit...',
+        ajax: {
+            url: "{{ route('get.penyakit') }}",
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results:  $.map(data, function (item) {
+                        return {
+                            text: item.nama_penyakit,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
     });
+});
 
-  $('.cari_gejala').select2({
-    placeholder: 'Cari Gejala...',
-    ajax: {
-      url: "{{ route('get.gejala') }}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function (data) {
-        return {
-          results:  $.map(data, function (item) {
-            return {
-              text: item.nama_gejala,
-              id: item.id
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
+$(document).ready(function() {
+    $('.gejala').select2({
+        placeholder: 'Cari Gejala...',
+        ajax: {
+            url: "{{ route('get.gejala') }}",
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results:  $.map(data, function (item) {
+                        return {
+                            text: item.nama_penyakit,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+});
 
 </script>
 
